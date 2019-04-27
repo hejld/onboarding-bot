@@ -40,7 +40,7 @@ const message = {
   ]),
 };
 
-const initialMessage = (teamId, userId) => {
+const initialMessage = (teamId, userId, channelId) => {
   let data = false;
   // try fetch team/user pair. This will throw an error if nothing exists in the db
   try {
@@ -57,9 +57,9 @@ const initialMessage = (teamId, userId) => {
     db.push(`/${teamId}/${userId}`, false);
 
     // send the default message as a DM to the user
-    message.channel = userId;
-    axios.post(`${apiUrl}/chat.postMessage`, qs.stringify(message)).then(result => {
-      console.log(result.data);
+    message.channel = channelId;
+    message.user = userId;
+    axios.post(`${apiUrl}/chat.postEphemeral`, qs.stringify(message)).then(result => {
     });
   } else {
     console.log('Already onboarded');

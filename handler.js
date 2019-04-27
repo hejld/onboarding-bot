@@ -27,10 +27,17 @@ module.exports.events = async event => {
     body: body.challenge
   };
 
-  if (body.event && body.event.type == 'member_joined_channel' && body.event.channel_type == 'C') return {
-    statusCode: 200,
-    body: 'Welcome to a public channel!',
-  };
+  // user joined channel, welcome him
+  if (body.event && body.event.type == 'member_joined_channel' && body.event.channel_type == 'C') {
+    // console.log(body.event)
+    console.log('sending welcome message to user ',body.event.user,' in channel ',body.event.channel)
+    onboard.initialMessage('THYJQE3R6', body.event.user,body.event.channel);
+    return {
+      statusCode: 200,
+      body: 'Welcome to a public channel!',
+    };
+  }
+
 
   return {
     statusCode: 200,
