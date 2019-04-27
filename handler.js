@@ -56,13 +56,13 @@ module.exports.interactive = async event => {
     return { statusCode: 400 };
   }
   const { user, team } = JSON.parse(qs.parse(event.body).payload);
-  onboard.accept(user.id, team.id);
 
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
-        text: 'Thank you! The Terms of Service have been accepted.',
+        text:
+          'Thank you <@' + user.id + '>! The Terms of Service have been accepted.',
       },
       null,
       2,
