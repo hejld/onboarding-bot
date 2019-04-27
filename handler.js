@@ -48,7 +48,7 @@ module.exports.events = async event => {
       body: 'Welcome to a public channel!',
     };
   }
-  res.sendStatus(500);
+  return { statusCode: 500 }
 };
 
 module.exports.interactive = async event => {
