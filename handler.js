@@ -3,16 +3,22 @@
 module.exports.hello = async event => {
   return {
     statusCode: 200,
-    body:
-      '<h2>The Welcome/Terms of Service app is running</h2> <p>Follow the' +
-      ' instructions in the README to configure the Slack App and your' +
-      ' environment variables.</p>',
+    body: JSON.stringify({
+      input: event,
+    }, null, 2),
   };
 };
 
 module.exports.events = async event => {
-  if (!body || !body.type) {
+  if (!event.body) {
     return { statusCode: 400 };
+  }
+
+  const body = JSON.parse(event.body)
+
+  if (body.challenge) return {
+    statusCode: 200,
+    body: body.challenge
   }
 
   const eventType = body.type;
