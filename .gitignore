@@ -5,3 +5,9 @@ package-lock.json
 
 # Serverless directories
 .serverless
+
+# Env properties
+.env
+
+# Local db
+users.json

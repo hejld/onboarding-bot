@@ -46,13 +46,9 @@ provider:
 #    variable1: value1
 
 # you can add packaging information here
-#package:
-#  include:
-#    - include-me.js
-#    - include-me-dir/**
-#  exclude:
-#    - exclude-me.js
-#    - exclude-me-dir/**
+package:
+  include:
+    - node_modules/**
 
 functions:
   hello:
@@ -68,6 +64,23 @@ functions:
       - http:
           path: events
           method: post
+
+  interactive:
+    handler: handler.interactive
+    events:
+      - http:
+          path: interactive
+          method: post
+
+  test:
+    handler: handler.test
+    events:
+      - http:
+          path: test
+          method: post
+    environment:
+      SLACK_ACCESS_TOKEN: ${env:SLACK_ACCESS_TOKEN}
+      SLACK_SIGNING_SECRET: ${env:SLACK_SIGNING_SECRET}
 
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}

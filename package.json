@@ -1,0 +1,28 @@
+{
+  "name": "onboarding-bot",
+  "version": "1.0.0",
+  "description": "Sample Slack app that uses the Events API and interactive messages to send new users a Terms of Service or welcome message",
+  "engines": {
+    "node": ">= 6.9.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "sls offline"
+  },
+  "authors": [
+    "Daniel Hejl <daniel@productboard.com>",
+    "Jakub Nesetril <jakub.nesetril@gmail.com>"
+  ],
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.18.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.16.3",
+    "node-json-db": "^0.7.3",
+    "querystring": "^0.2.0",
+    "tsscmp": "^1.0.6"
+  },
+  "devDependencies": {
+    "serverless-offline": "^4.9.4"
+  }
+}
