@@ -14,19 +14,23 @@ module.exports.hello = async event => {
 };
 
 module.exports.events = async event => {
+  // no POST input?
   if (!event.body) {
     return { statusCode: 400 };
-  }
+  };
 
   const body = JSON.parse(event.body);
 
-  if (body.challenge)
-    return {
-      statusCode: 200,
-      body: body.challenge,
-    };
+  // respond to Slack challenge when testing events handler webhook
+  if (body.challenge) return {
+    statusCode: 200,
+    body: body.challenge
+  };
 
-  const eventType = body.type;
+  if (body.event && body.event.type == 'member_joined_channel' && body.event.channel_type == 'C') return {
+    statusCode: 200,
+    body: 'Welcome to a public channel!',
+  };
 
   return {
     statusCode: 200,
