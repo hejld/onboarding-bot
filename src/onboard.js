@@ -59,8 +59,9 @@ const initialMessage = (teamId, userId, channelId) => {
     // send the default message as a DM to the user
     message.channel = channelId;
     message.user = userId;
-    axios.post(`${apiUrl}/chat.postEphemeral`, qs.stringify(message)).then(result => {
-    });
+    axios
+      .post(`${apiUrl}/chat.postEphemeral`, qs.stringify(message))
+      .then(result => {});
   } else {
     console.log('Already onboarded');
   }
@@ -69,7 +70,9 @@ const initialMessage = (teamId, userId, channelId) => {
 // set the team/user record to true to indicate that they've accepted the ToS
 // you might want to store the date/time that the terms were accepted
 
-const accept = (userId, teamId) => db.push(`/${teamId}/${userId}`, true);
+const accept = (userId, teamId) => {
+  db.push(`/${teamId}/${userId}`, true);
+};
 
 // find all the users who've been presented the ToS and send them a reminder to accept.
 // the same logic can be applied to find users that need to be removed from the team
