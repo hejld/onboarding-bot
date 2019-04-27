@@ -8,29 +8,27 @@ const postResult = result => console.log(result.data);
 const message = {
   token: process.env.SLACK_ACCESS_TOKEN,
   link_names: true,
-  text: "Welcome to the team! We're glad you're here.",
+  text: " 👋, welcome aboard! We’re excited to have you with us. I’m here to make your onboarding process easier.",
   as_user: false,
   attachments: JSON.stringify([
     {
-      title: 'What is Slack?',
-      text:
-        "Slack is where work happens. If this is your first time using Slack, take some time to read the help docs at get.slack.help and our internal wiki. If you have any questions, jump into #help-slack and we'll help you out",
-      color: '#74c8ed',
-    },
-    {
-      title: 'Code of Conduct',
-      text:
-        'Our goal is to maintain a safe, helpful and friendly community for everyone, regardless of experience, gender identity and expression, sexual orientation, disability, personal appearance, body size, race, ethnicity, age, religion, nationality, or other defining characteristic. Please take the time to read through <https://code.localhost|Code of Conduct> before continuing.',
-      callback_id: 'terms-of-service',
+      text: 'Before we start let ask how something. Have you used Slack :slack: before?',
+      callback_id: 'new-to-slack',
       color: '#3060f0',
       actions: [
         {
-          name: 'accept',
-          text: 'Accept',
+          name: 'status',
+          text: 'Yes, I am a :slack: Lover.',
           type: 'button',
-          value: 'accept',
+          value: 'experienced',
           style: 'primary',
-        },
+        },{
+          name: 'status',
+          text: 'No, show me how to use Slack :slack:',
+          type: 'button',
+          value: 'new',
+          style: 'danger',
+        }
       ],
     },
   ]),
@@ -38,6 +36,7 @@ const message = {
 
 const initialMessage = (teamId, userId, channelId) => {
   message.channel = channelId;
+  message.text = `Hello <@${userId}>`+message.text;
   message.user = userId;
   axios
     .post(`${apiUrl}/chat.postEphemeral`, qs.stringify(message))
